@@ -1,0 +1,6 @@
+{
+    "jsPlugins": ["eslint-plugin-perfectionist"],
+    "rules": {
+        "eslint-plugin-perfectionist/sort-imports": ["error", { "order": "desc" }]
+    }
+}

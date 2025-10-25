@@ -1,0 +1,28 @@
+{
+  "name": "oxlint-jsplugin-checker",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "node --import @oxc-node/core/register ./src/index.ts",
+    "lint": "oxlint testfile.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "pnpm@10.6.5",
+  "dependencies": {
+    "oxlint": "^1.24.0"
+  },
+  "devDependencies": {
+    "@oxc-node/core": "^0.0.32",
+    "@stylistic/eslint-plugin": "^5.5.0",
+    "@types/node": "^24.9.1",
+    "eslint-plugin-header": "^3.1.1",
+    "eslint-plugin-jsdoc": "^61.1.8",
+    "eslint-plugin-mocha": "^11.2.0",
+    "eslint-plugin-perfectionist": "^4.15.1",
+    "eslint-plugin-regexp": "^2.10.0",
+    "eslint-plugin-tsdoc": "^0.4.0"
+  }
+}

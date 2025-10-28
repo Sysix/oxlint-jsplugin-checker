@@ -41,7 +41,7 @@ export const executeJsPlugin = (rule: string, pluginName: string): string => {
     },
     jsPlugins: [pluginName],
     rules: {
-      [`${pluginName}/${rule}`]: 'error',
+      [rule]: 'error',
     },
   };
 

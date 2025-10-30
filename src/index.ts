@@ -1,4 +1,3 @@
-
 import stylistic from '@stylistic/eslint-plugin';
 // import header from 'eslint-plugin-header';
 // import jsdoc from 'eslint-plugin-jsdoc';
@@ -6,6 +5,9 @@ import stylistic from '@stylistic/eslint-plugin';
 import perfectionist from 'eslint-plugin-perfectionist';
 // import regexp from 'eslint-plugin-regexp';
 // import tsdoc from 'eslint-plugin-tsdoc';
+// import testingLibrary from 'eslint-plugin-testing-library';
+// import jestDom from 'eslint-plugin-jest-dom';
+// import storybook from 'eslint-plugin-storybook';
 import { executeJsPlugin } from './helper';
 
 const setup = [
@@ -33,6 +35,18 @@ const setup = [
     pluginName: '@stylistic/eslint-plugin',
     rules: Object.keys(stylistic.rules || {}),
   },
+  // {
+  //   pluginName: 'eslint-plugin-testing-library',
+  //   rules: Object.keys(testingLibrary.rules || {}),
+  // },
+  // {
+  //   pluginName: 'eslint-plugin-jest-dom',
+  //   rules: Object.keys(jestDom.rules || {}),
+  // },
+  // {
+  //   pluginName: 'eslint-plugin-storybook',
+  //   rules: Object.keys(storybook.rules || {}),
+  // },
   // {
   //   pluginName: 'eslint-plugin-regexp',
   //   rules: Object.keys(regexp.rules || {}),

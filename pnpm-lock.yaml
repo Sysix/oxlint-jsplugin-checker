@@ -39,6 +39,9 @@ importers:
       eslint-plugin-formatjs:
         specifier: ^5.4.2
         version: 5.4.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+      eslint-plugin-fp:
+        specifier: ^2.3.0
+        version: 2.3.0(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-header:
         specifier: ^3.1.1
         version: 3.1.1(eslint@9.38.0(jiti@2.6.1))
@@ -1083,6 +1086,10 @@ packages:
       typescript:
         optional: true
 
+  create-eslint-index@1.0.0:
+    resolution: {integrity: sha512-nXvJjnfDytOOaPOonX0h0a1ggMoqrhdekGeZkD6hkcWYvlCWhU719tKFVh8eU04CnMwu3uwe1JjwuUF2C3k2qg==}
+    engines: {node: '>=4.0.0'}
+
   cross-inspect@1.0.1:
     resolution: {integrity: sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==}
     engines: {node: '>=16.0.0'}
@@ -1181,6 +1188,10 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
+  eslint-ast-utils@1.1.0:
+    resolution: {integrity: sha512-otzzTim2/1+lVrlH19EfQQJEhVJSu0zOb9ygb3iapN6UlyaDtyRq4b5U1FuW0v1lRa9Fp/GJyHkSwm6NqABgCA==}
+    engines: {node: '>=4'}
+
   eslint-plugin-compat@6.0.2:
     resolution: {integrity: sha512-1ME+YfJjmOz1blH0nPZpHgjMGK4kjgEeoYqGCqoBPQ/mGu/dJzdoP0f1C8H2jcWZjzhZjAMccbM/VdXhPORIfA==}
     engines: {node: '>=18.x'}
@@ -1196,6 +1207,12 @@ packages:
     resolution: {integrity: sha512-IdJt/il0FASmk/aJDzl96Zh0tovm+KVhCbA5d+YC14gOpeFe1n6766JMi/RP9YOY9dhe6BbWEJnk9dPJwMMngw==}
     peerDependencies:
       eslint: ^9.23.0
+
+  eslint-plugin-fp@2.3.0:
+    resolution: {integrity: sha512-3n2oHibwoIxAht9/+ZaTldhI6brXORgl8oNXqZd+d9xuAQt2SBJ2/aml0oQRMWvXrgsz2WG6wfC++NjzSG3prA==}
+    engines: {node: '>=4.0.0'}
+    peerDependencies:
+      eslint: '>=3'
 
   eslint-plugin-header@3.1.1:
     resolution: {integrity: sha512-9vlKxuJ4qf793CmeeSrZUvVClw6amtpghq3CuWcB5cUNnWHQhgcqy5eF8oVKFk1G3Y/CbchGfEaw3wiIJaNmVg==}
@@ -1603,6 +1620,10 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
+  lodash.get@4.4.2:
+    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
+    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
+
   lodash.lowercase@4.3.0:
     resolution: {integrity: sha512-UcvP1IZYyDKyEL64mmrwoA1AbFu5ahojhTtkOUr1K9dbuxzS9ev8i4TxMMGCqRC9TE8uDaSoufNAXxRPNTseVA==}
 
@@ -1614,6 +1635,12 @@ packages:
 
   lodash.sortby@4.7.0:
     resolution: {integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==}
+
+  lodash.zip@4.2.0:
+    resolution: {integrity: sha512-C7IOaBBK/0gMORRBd8OETNx3kmOkgIWIPvyDpZSCTwUrpYmgZwJkjZeOD8ww4xbOUOs4/attY+pciKvadNfFbg==}
+
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
 
   loupe@3.2.1:
     resolution: {integrity: sha512-CdzqowRJCeLU72bHvWqwRBBlLcMEtIvGrlvef74kMnV2AolS9Y8xUv1I0U/MNAWMhBlKIoyuEgoJ0t/bbwHbLQ==}
@@ -1814,6 +1841,10 @@ packages:
 
   remove-trailing-separator@1.1.0:
     resolution: {integrity: sha512-/hS+Y0u3aOfIETiaiirUFwDBDzmXPvO+jAfKTitUngIPzdKc6Z0LoFjM/CK5PL4C+eKwHohlHAb6H0VFfmmUsw==}
+
+  req-all@0.1.0:
+    resolution: {integrity: sha512-ZdvPr8uXy9ujX3KujwE2P1HWkMYgogIhqeAeyb47MqWjSfyxERSm0TNbN/IapCCmWDufXab04AYrRgObaJCJ6Q==}
+    engines: {node: '>=4'}
 
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
@@ -3151,6 +3182,10 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
+  create-eslint-index@1.0.0:
+    dependencies:
+      lodash.get: 4.4.2
+
   cross-inspect@1.0.1:
     dependencies:
       tslib: 2.8.1
@@ -3250,6 +3285,11 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
+  eslint-ast-utils@1.1.0:
+    dependencies:
+      lodash.get: 4.4.2
+      lodash.zip: 4.2.0
+
   eslint-plugin-compat@6.0.2(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
       '@mdn/browser-compat-data': 5.7.6
@@ -3283,6 +3323,14 @@ snapshots:
       - supports-color
       - ts-jest
       - typescript
+
+  eslint-plugin-fp@2.3.0(eslint@9.38.0(jiti@2.6.1)):
+    dependencies:
+      create-eslint-index: 1.0.0
+      eslint: 9.38.0(jiti@2.6.1)
+      eslint-ast-utils: 1.1.0
+      lodash: 4.17.21
+      req-all: 0.1.0
 
   eslint-plugin-header@3.1.1(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
@@ -3714,6 +3762,8 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
+  lodash.get@4.4.2: {}
+
   lodash.lowercase@4.3.0: {}
 
   lodash.memoize@4.1.2: {}
@@ -3721,6 +3771,10 @@ snapshots:
   lodash.merge@4.6.2: {}
 
   lodash.sortby@4.7.0: {}
+
+  lodash.zip@4.2.0: {}
+
+  lodash@4.17.21: {}
 
   loupe@3.2.1: {}
 
@@ -3897,6 +3951,8 @@ snapshots:
       refa: 0.12.1
 
   remove-trailing-separator@1.1.0: {}
+
+  req-all@0.1.0: {}
 
   require-from-string@2.0.2: {}
 

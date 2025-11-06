@@ -21,6 +21,8 @@ import cypress from 'eslint-plugin-cypress';
 import playwright from 'eslint-plugin-playwright';
 import solid from 'eslint-plugin-solid';
 import compat from 'eslint-plugin-compat';
+// @ts-expect-error: No types available
+import fp from 'eslint-plugin-fp';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -107,6 +109,10 @@ const setup = [
     pluginName: 'eslint-plugin-compat',
     rules: Object.keys(compat.rules || {}),
   },
+  {
+    pluginName: 'eslint-plugin-fp',
+    rules: Object.keys(fp.rules || {}),
+  },
 ];
 
 // NOTE: jsdoc will always fail due to being the same name as a built-in plugin.
@@ -132,7 +138,8 @@ const pluginsToTest = [
   'eslint-plugin-cypress',
   'eslint-plugin-playwright',
   'eslint-plugin-solid',
-  'eslint-plugin-compat'
+  'eslint-plugin-compat',
+  'eslint-plugin-fp'
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

@@ -8,6 +8,8 @@ import perfectionist from 'eslint-plugin-perfectionist';
 // import testingLibrary from 'eslint-plugin-testing-library';
 // import jestDom from 'eslint-plugin-jest-dom';
 // import storybook from 'eslint-plugin-storybook';
+// import noJquery from 'eslint-plugin-no-jquery';
+// import graphqlEslint from '@graphql-eslint/eslint-plugin'
 import { executeJsPlugin } from './helper';
 
 const setup = [
@@ -50,6 +52,14 @@ const setup = [
   // {
   //   pluginName: 'eslint-plugin-regexp',
   //   rules: Object.keys(regexp.rules || {}),
+  // },
+  // {
+  //   pluginName: 'eslint-plugin-no-jquery',
+  //   rules: Object.keys(noJquery.rules || {}),
+  // },
+  // {
+  //   pluginName: '@graphql-eslint/eslint-plugin',
+  //   rules: Object.keys(graphqlEslint.rules || {}),
   // },
 ];
 

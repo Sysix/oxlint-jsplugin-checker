@@ -16,6 +16,7 @@ import docusaurus from '@docusaurus/eslint-plugin';
 // @ts-expect-error: No types available
 import importAlias from 'eslint-plugin-import-alias';
 import angularEslint from '@angular-eslint/eslint-plugin';
+import formatjs from 'eslint-plugin-formatjs';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -80,6 +81,11 @@ const setup = [
   {
     pluginName: '@angular-eslint/eslint-plugin',
     rules: Object.keys(angularEslint.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-formatjs',
+    // @ts-expect-error: types are incorrect for formatjs.rules
+    rules: Object.keys(formatjs.rules || {}),
   }
 ];
 
@@ -100,6 +106,7 @@ const pluginsToTest = [
   '@docusaurus/eslint-plugin',
   'eslint-plugin-import-alias',
   '@angular-eslint/eslint-plugin',
+  'eslint-plugin-formatjs',
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

@@ -1,69 +1,94 @@
 import stylistic from '@stylistic/eslint-plugin';
-// import header from 'eslint-plugin-header';
-// import jsdoc from 'eslint-plugin-jsdoc';
-// import mocha from 'eslint-plugin-mocha';
+// @ts-expect-error: No types available
+import header from 'eslint-plugin-header';
+import jsdoc from 'eslint-plugin-jsdoc';
+import mocha from 'eslint-plugin-mocha';
 import perfectionist from 'eslint-plugin-perfectionist';
-// import regexp from 'eslint-plugin-regexp';
-// import tsdoc from 'eslint-plugin-tsdoc';
-// import testingLibrary from 'eslint-plugin-testing-library';
-// import jestDom from 'eslint-plugin-jest-dom';
-// import storybook from 'eslint-plugin-storybook';
-// import noJquery from 'eslint-plugin-no-jquery';
-// import graphqlEslint from '@graphql-eslint/eslint-plugin'
+import regexp from 'eslint-plugin-regexp';
+import tsdoc from 'eslint-plugin-tsdoc';
+import testingLibrary from 'eslint-plugin-testing-library';
+import jestDom from 'eslint-plugin-jest-dom';
+import storybook from 'eslint-plugin-storybook';
+// @ts-expect-error: No types available
+import noJquery from 'eslint-plugin-no-jquery';
+import graphqlEslint from '@graphql-eslint/eslint-plugin'
 import { executeJsPlugin } from './helper';
+
+const isQuiet = process.argv.includes('--quiet');
 
 const setup = [
   {
     pluginName: 'eslint-plugin-perfectionist',
     rules: Object.keys(perfectionist.rules),
   },
-  // {
-  //   pluginName: 'eslint-plugin-header',
-  //   rules: Object.keys(header.rules),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-tsdoc',
-  //   rules: Object.keys(tsdoc.rules),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-jsdoc',
-  //   rules: Object.keys(jsdoc.rules || {}),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-mocha',
-  //   rules: Object.keys(mocha.rules || {}),
-  // },
+  {
+    pluginName: 'eslint-plugin-header',
+    rules: Object.keys(header.rules),
+  },
+  {
+    pluginName: 'eslint-plugin-tsdoc',
+    rules: Object.keys(tsdoc.rules),
+  },
+  {
+    pluginName: 'eslint-plugin-jsdoc',
+    rules: Object.keys(jsdoc.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-mocha',
+    rules: Object.keys(mocha.rules || {}),
+  },
   {
     pluginName: '@stylistic/eslint-plugin',
     rules: Object.keys(stylistic.rules || {}),
   },
-  // {
-  //   pluginName: 'eslint-plugin-testing-library',
-  //   rules: Object.keys(testingLibrary.rules || {}),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-jest-dom',
-  //   rules: Object.keys(jestDom.rules || {}),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-storybook',
-  //   rules: Object.keys(storybook.rules || {}),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-regexp',
-  //   rules: Object.keys(regexp.rules || {}),
-  // },
-  // {
-  //   pluginName: 'eslint-plugin-no-jquery',
-  //   rules: Object.keys(noJquery.rules || {}),
-  // },
-  // {
-  //   pluginName: '@graphql-eslint/eslint-plugin',
-  //   rules: Object.keys(graphqlEslint.rules || {}),
-  // },
+  {
+    pluginName: 'eslint-plugin-testing-library',
+    rules: Object.keys(testingLibrary.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-jest-dom',
+    rules: Object.keys(jestDom.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-storybook',
+    rules: Object.keys(storybook.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-regexp',
+    rules: Object.keys(regexp.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-no-jquery',
+    rules: Object.keys(noJquery.rules || {}),
+  },
+  {
+    pluginName: '@graphql-eslint/eslint-plugin',
+    rules: Object.keys(graphqlEslint.rules || {}),
+  },
 ];
 
-for (const { pluginName, rules } of setup) {
+// Uncomment plugins here to test them.
+const pluginsToTest = [
+  // 'eslint-plugin-perfectionist',
+  // 'eslint-plugin-header',
+  // 'eslint-plugin-tsdoc',
+  // 'eslint-plugin-jsdoc',
+  // 'eslint-plugin-mocha',
+  // '@stylistic/eslint-plugin',
+  // 'eslint-plugin-testing-library',
+  // 'eslint-plugin-jest-dom',
+  // 'eslint-plugin-storybook',
+  // 'eslint-plugin-regexp',
+  // 'eslint-plugin-no-jquery',
+  '@graphql-eslint/eslint-plugin',
+].map(
+  (key) => setup.find((s) => s.pluginName === key)!,
+);
+
+let successfulRulesCounter = 0;
+let failedRulesCounter = 0;
+
+for (const { pluginName, rules } of pluginsToTest) {
   console.log(`\n=== Checking plugin: ${pluginName} ===\n`);
   for (const ruleName of rules) {
     const ruleSuffix = pluginName.startsWith('@')
@@ -73,9 +98,20 @@ for (const { pluginName, rules } of setup) {
     const output = executeJsPlugin(rule, pluginName);
     if (output.trimStart().startsWith('Found 0 warnings and 0 errors')) {
       console.log(`✔️ Rule "${rule}"`);
+      successfulRulesCounter++;
       continue;
     }
 
-    console.log(`⚠ Output for rule "${rule}":\n${output}\n\n`);
+    failedRulesCounter++;
+
+    if (isQuiet) {
+      console.log(`❌ Rule "${rule}" produced warnings/errors.`);
+    } else {
+      console.log(`❌ Output for rule "${rule}":\n${output}\n\n`);
+    }
   }
 }
+
+console.log(`\n=== Summary ===\n`);
+console.log(`Successful rules: ${successfulRulesCounter}`);
+console.log(`Failed rules: ${failedRulesCounter}`);

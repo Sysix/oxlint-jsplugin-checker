@@ -21,6 +21,7 @@
     "@oxc-node/core": "^0.0.32",
     "@stylistic/eslint-plugin": "^5.5.0",
     "@types/node": "^24.9.1",
+    "eslint-plugin-better-tailwindcss": "^3.7.10",
     "eslint-plugin-compat": "^6.0.2",
     "eslint-plugin-cypress": "^5.2.0",
     "eslint-plugin-formatjs": "^5.4.2",

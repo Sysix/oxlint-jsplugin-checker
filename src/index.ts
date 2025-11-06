@@ -23,6 +23,7 @@ import solid from 'eslint-plugin-solid';
 import compat from 'eslint-plugin-compat';
 // @ts-expect-error: No types available
 import fp from 'eslint-plugin-fp';
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -113,6 +114,10 @@ const setup = [
     pluginName: 'eslint-plugin-fp',
     rules: Object.keys(fp.rules || {}),
   },
+  {
+    pluginName: 'eslint-plugin-better-tailwindcss',
+    rules: Object.keys(betterTailwindcss.rules || {}),
+  },
 ];
 
 // NOTE: jsdoc will always fail due to being the same name as a built-in plugin.
@@ -139,7 +144,8 @@ const pluginsToTest = [
   'eslint-plugin-playwright',
   'eslint-plugin-solid',
   'eslint-plugin-compat',
-  'eslint-plugin-fp'
+  'eslint-plugin-fp',
+  'eslint-plugin-better-tailwindcss',
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

@@ -11,7 +11,11 @@ import jestDom from 'eslint-plugin-jest-dom';
 import storybook from 'eslint-plugin-storybook';
 // @ts-expect-error: No types available
 import noJquery from 'eslint-plugin-no-jquery';
-import graphqlEslint from '@graphql-eslint/eslint-plugin'
+import graphqlEslint from '@graphql-eslint/eslint-plugin';
+import docusaurus from '@docusaurus/eslint-plugin';
+// @ts-expect-error: No types available
+import importAlias from 'eslint-plugin-import-alias';
+import angularEslint from '@angular-eslint/eslint-plugin';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -65,22 +69,37 @@ const setup = [
     pluginName: '@graphql-eslint/eslint-plugin',
     rules: Object.keys(graphqlEslint.rules || {}),
   },
+  {
+    pluginName: '@docusaurus/eslint-plugin',
+    rules: Object.keys(docusaurus.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-import-alias',
+    rules: Object.keys(importAlias.rules || {}),
+  },
+  {
+    pluginName: '@angular-eslint/eslint-plugin',
+    rules: Object.keys(angularEslint.rules || {}),
+  }
 ];
 
 // Uncomment plugins here to test them.
 const pluginsToTest = [
-  // 'eslint-plugin-perfectionist',
-  // 'eslint-plugin-header',
-  // 'eslint-plugin-tsdoc',
-  // 'eslint-plugin-jsdoc',
-  // 'eslint-plugin-mocha',
-  // '@stylistic/eslint-plugin',
-  // 'eslint-plugin-testing-library',
-  // 'eslint-plugin-jest-dom',
-  // 'eslint-plugin-storybook',
-  // 'eslint-plugin-regexp',
-  // 'eslint-plugin-no-jquery',
+  'eslint-plugin-perfectionist',
+  'eslint-plugin-header',
+  'eslint-plugin-tsdoc',
+  'eslint-plugin-jsdoc',
+  'eslint-plugin-mocha',
+  '@stylistic/eslint-plugin',
+  'eslint-plugin-testing-library',
+  'eslint-plugin-jest-dom',
+  'eslint-plugin-storybook',
+  'eslint-plugin-regexp',
+  'eslint-plugin-no-jquery',
   '@graphql-eslint/eslint-plugin',
+  '@docusaurus/eslint-plugin',
+  'eslint-plugin-import-alias',
+  '@angular-eslint/eslint-plugin',
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

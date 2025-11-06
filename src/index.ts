@@ -17,6 +17,8 @@ import docusaurus from '@docusaurus/eslint-plugin';
 import importAlias from 'eslint-plugin-import-alias';
 import angularEslint from '@angular-eslint/eslint-plugin';
 import formatjs from 'eslint-plugin-formatjs';
+import cypress from 'eslint-plugin-cypress';
+import playwright from 'eslint-plugin-playwright';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -86,7 +88,15 @@ const setup = [
     pluginName: 'eslint-plugin-formatjs',
     // @ts-expect-error: types are incorrect for formatjs.rules
     rules: Object.keys(formatjs.rules || {}),
-  }
+  },
+  {
+    pluginName: 'eslint-plugin-cypress',
+    rules: Object.keys(cypress.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-playwright',
+    rules: Object.keys(playwright.rules || {}),
+  },
 ];
 
 // Uncomment plugins here to test them.
@@ -107,6 +117,8 @@ const pluginsToTest = [
   'eslint-plugin-import-alias',
   '@angular-eslint/eslint-plugin',
   'eslint-plugin-formatjs',
+  'eslint-plugin-cypress',
+  'eslint-plugin-playwright',
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

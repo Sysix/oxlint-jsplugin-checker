@@ -30,6 +30,9 @@ importers:
       '@types/node':
         specifier: ^24.9.1
         version: 24.9.1
+      eslint-plugin-cypress:
+        specifier: ^5.2.0
+        version: 5.2.0(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-formatjs:
         specifier: ^5.4.2
         version: 5.4.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
@@ -54,6 +57,9 @@ importers:
       eslint-plugin-perfectionist:
         specifier: ^4.15.1
         version: 4.15.1(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3)
+      eslint-plugin-playwright:
+        specifier: 2.3.0
+        version: 2.3.0(eslint@9.38.0(jiti@2.6.1))
       eslint-plugin-regexp:
         specifier: ^2.10.0
         version: 2.10.0(eslint@9.38.0(jiti@2.6.1))
@@ -1163,6 +1169,11 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
+  eslint-plugin-cypress@5.2.0:
+    resolution: {integrity: sha512-vuCUBQloUSILxtJrUWV39vNIQPlbg0L7cTunEAzvaUzv9LFZZym+KFLH18n9j2cZuFPdlxOqTubCvg5se0DyGw==}
+    peerDependencies:
+      eslint: '>=9'
+
   eslint-plugin-formatjs@5.4.2:
     resolution: {integrity: sha512-IdJt/il0FASmk/aJDzl96Zh0tovm+KVhCbA5d+YC14gOpeFe1n6766JMi/RP9YOY9dhe6BbWEJnk9dPJwMMngw==}
     peerDependencies:
@@ -1207,6 +1218,12 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     peerDependencies:
       eslint: '>=8.45.0'
+
+  eslint-plugin-playwright@2.3.0:
+    resolution: {integrity: sha512-7UeUuIb5SZrNkrUGb2F+iwHM97kn33/huajcVtAaQFCSMUYGNFvjzRPil5C0OIppslPfuOV68M/zsisXx+/ZvQ==}
+    engines: {node: '>=16.9.0'}
+    peerDependencies:
+      eslint: '>=8.40.0'
 
   eslint-plugin-regexp@2.10.0:
     resolution: {integrity: sha512-ovzQT8ESVn5oOe5a7gIDPD5v9bCSjIFJu57sVPDqgPRXicQzOnYfFN21WoQBQF18vrhT5o7UMKFwJQVVjyJ0ng==}
@@ -1359,6 +1376,10 @@ packages:
 
   globals@15.15.0:
     resolution: {integrity: sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==}
+    engines: {node: '>=18'}
+
+  globals@16.5.0:
+    resolution: {integrity: sha512-c/c15i26VrJ4IRt5Z89DnIzCGDn9EcebibhAOjw5ibqEHsE1wLUgkPn9RDmNcUKyU87GeaL633nyJ+pplFR2ZQ==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -3175,6 +3196,11 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
+  eslint-plugin-cypress@5.2.0(eslint@9.38.0(jiti@2.6.1)):
+    dependencies:
+      eslint: 9.38.0(jiti@2.6.1)
+      globals: 16.5.0
+
   eslint-plugin-formatjs@5.4.2(eslint@9.38.0(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@formatjs/icu-messageformat-parser': 2.11.4
@@ -3245,6 +3271,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  eslint-plugin-playwright@2.3.0(eslint@9.38.0(jiti@2.6.1)):
+    dependencies:
+      eslint: 9.38.0(jiti@2.6.1)
+      globals: 16.5.0
 
   eslint-plugin-regexp@2.10.0(eslint@9.38.0(jiti@2.6.1)):
     dependencies:
@@ -3441,6 +3472,8 @@ snapshots:
   globals@14.0.0: {}
 
   globals@15.15.0: {}
+
+  globals@16.5.0: {}
 
   globby@11.1.0:
     dependencies:

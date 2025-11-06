@@ -19,6 +19,8 @@ import angularEslint from '@angular-eslint/eslint-plugin';
 import formatjs from 'eslint-plugin-formatjs';
 import cypress from 'eslint-plugin-cypress';
 import playwright from 'eslint-plugin-playwright';
+import solid from 'eslint-plugin-solid';
+import compat from 'eslint-plugin-compat';
 import { executeJsPlugin } from './helper';
 
 const isQuiet = process.argv.includes('--quiet');
@@ -97,6 +99,14 @@ const setup = [
     pluginName: 'eslint-plugin-playwright',
     rules: Object.keys(playwright.rules || {}),
   },
+  {
+    pluginName: 'eslint-plugin-solid',
+    rules: Object.keys(solid.rules || {}),
+  },
+  {
+    pluginName: 'eslint-plugin-compat',
+    rules: Object.keys(compat.rules || {}),
+  },
 ];
 
 // NOTE: jsdoc will always fail due to being the same name as a built-in plugin.
@@ -121,6 +131,8 @@ const pluginsToTest = [
   'eslint-plugin-formatjs',
   'eslint-plugin-cypress',
   'eslint-plugin-playwright',
+  'eslint-plugin-solid',
+  'eslint-plugin-compat'
 ].map(
   (key) => setup.find((s) => s.pluginName === key)!,
 );

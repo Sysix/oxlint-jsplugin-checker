@@ -41,7 +41,9 @@ export const executeJsPlugin = (rule: string, pluginName: string): string => {
     },
     jsPlugins: [pluginName],
     rules: {
-      [rule]: 'error',
+      // Our `testfile.ts` can have code which causes the lint rule to fail sometimes,
+      // and that's fine. We just want to make sure we don't get an error.
+      [rule]: 'warn',
     },
   };
 

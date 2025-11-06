@@ -159,11 +159,12 @@ for (const { pluginName, rules } of pluginsToTest) {
   let currentPluginHasAnyFailures = false;
   for (const ruleName of rules) {
     const ruleSuffix = pluginName.startsWith('@')
-    ? pluginName.split('/', 1)[0]
-    : pluginName.replace('eslint-plugin-', '');
+      ? pluginName.split('/', 1)[0]
+      : pluginName.replace('eslint-plugin-', '');
     const rule = `${ruleSuffix}/${ruleName}`;
     const output = executeJsPlugin(rule, pluginName);
-    if (output.trimStart().startsWith('Found 0 warnings and 0 errors')) {
+    /// We are fine with warnings (they mean the rule failed but did not hit an error/crash), so allow them.
+    if (/Found \d+ warnings? and 0 errors/.test(output.trimStart())) {
       console.log(`✔️ Rule "${rule}"`);
       successfulRulesCounter++;
       continue;

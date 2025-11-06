@@ -99,12 +99,14 @@ const setup = [
   },
 ];
 
+// NOTE: jsdoc will always fail due to being the same name as a built-in plugin.
+
 // Uncomment plugins here to test them.
 const pluginsToTest = [
   'eslint-plugin-perfectionist',
   'eslint-plugin-header',
   'eslint-plugin-tsdoc',
-  'eslint-plugin-jsdoc',
+  // 'eslint-plugin-jsdoc',
   'eslint-plugin-mocha',
   '@stylistic/eslint-plugin',
   'eslint-plugin-testing-library',

@@ -146,9 +146,11 @@ const pluginsToTest = [
 
 let successfulRulesCounter = 0;
 let failedRulesCounter = 0;
+let fullySuccessfulPlugins = [];
 
 for (const { pluginName, rules } of pluginsToTest) {
   console.log(`\n=== Checking plugin: ${pluginName} ===\n`);
+  let currentPluginHasAnyFailures = false;
   for (const ruleName of rules) {
     const ruleSuffix = pluginName.startsWith('@')
     ? pluginName.split('/', 1)[0]
@@ -168,9 +170,22 @@ for (const { pluginName, rules } of pluginsToTest) {
     } else {
       console.log(`❌ Output for rule "${rule}":\n${output}\n\n`);
     }
+    currentPluginHasAnyFailures = true;
   }
+
+  // If no failures occurred in this plugin, add it to the list of fully successful plugins.
+  if (!currentPluginHasAnyFailures) {
+    fullySuccessfulPlugins.push(pluginName);
+  } 
 }
 
 console.log(`\n=== Summary ===\n`);
 console.log(`Successful rules: ${successfulRulesCounter}`);
 console.log(`Failed rules: ${failedRulesCounter}`);
+
+if (fullySuccessfulPlugins.length > 0) {
+  console.log(`\nPlugins with all rules passing:`);
+  for (const pluginName of fullySuccessfulPlugins) {
+    console.log(`- ${pluginName}`);
+  }
+}

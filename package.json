@@ -12,15 +12,15 @@
   "license": "MIT",
   "packageManager": "pnpm@10.6.5",
   "dependencies": {
-    "oxlint": "^1.26.0"
+    "oxlint": "^1.28.0"
   },
   "devDependencies": {
-    "@angular-eslint/eslint-plugin": "^20.5.1",
+    "@angular-eslint/eslint-plugin": "^20.6.0",
     "@docusaurus/eslint-plugin": "^3.9.2",
     "@graphql-eslint/eslint-plugin": "^4.4.0",
     "@oxc-node/core": "^0.0.32",
     "@stylistic/eslint-plugin": "^5.5.0",
-    "@types/node": "^24.9.1",
+    "@types/node": "^24.10.0",
     "eslint-plugin-better-tailwindcss": "^3.7.10",
     "eslint-plugin-compat": "^6.0.2",
     "eslint-plugin-cypress": "^5.2.0",
@@ -29,14 +29,14 @@
     "eslint-plugin-header": "^3.1.1",
     "eslint-plugin-import-alias": "^1.2.0",
     "eslint-plugin-jest-dom": "^5.5.0",
-    "eslint-plugin-jsdoc": "^61.1.8",
+    "eslint-plugin-jsdoc": "^61.1.12",
     "eslint-plugin-mocha": "^11.2.0",
     "eslint-plugin-no-jquery": "^3.1.1",
     "eslint-plugin-perfectionist": "^4.15.1",
     "eslint-plugin-playwright": "^2.3.0",
     "eslint-plugin-regexp": "^2.10.0",
     "eslint-plugin-solid": "^0.14.5",
-    "eslint-plugin-storybook": "^10.0.1",
+    "eslint-plugin-storybook": "^10.0.7",
     "eslint-plugin-testing-library": "^7.13.3",
     "eslint-plugin-tsdoc": "^0.4.0"
   }

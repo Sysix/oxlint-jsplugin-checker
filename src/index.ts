@@ -29,15 +29,14 @@ const pluginsToTest = [
   'eslint-plugin-compat',
   'eslint-plugin-fp',
   'eslint-plugin-better-tailwindcss',
-]
+];
 
 let successfulRulesCounter = 0;
 let failedRulesCounter = 0;
 let fullySuccessfulPlugins = [];
 
 for (const packageName of pluginsToTest) {
-  let {default: plugin} = await import(packageName);
-
+  const {default: plugin} = await import(packageName);
   const pluginName = plugin.meta?.name ?? getPluginName(packageName);
 
   console.log(`\n=== Checking plugin: ${packageName} ===\n`);

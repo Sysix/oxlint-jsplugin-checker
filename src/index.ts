@@ -37,7 +37,7 @@ let fullySuccessfulPlugins = [];
 
 for (const packageName of pluginsToTest) {
   const {default: plugin} = await import(packageName);
-  const pluginName = plugin.meta?.name ?? getPluginName(packageName);
+  const pluginName = getPluginName(plugin.meta?.name ?? packageName);
 
   console.log(`\n=== Checking plugin: ${packageName} ===\n`);
 

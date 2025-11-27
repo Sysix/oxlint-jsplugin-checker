@@ -1,19 +1,57 @@
 import { execSync } from 'node:child_process';
 import fs from 'node:fs';
 
-const executeOxlintWithConfiguration = (
-  filename: string,
-  config: {
-    jsPlugin?: string[];
-    categories?: Record<string, unknown>;
-    rules?: Record<string, unknown>;
+const reservedPluginNames = new Set([
+  'jsdoc',
+]);
+
+export const executeJsPlugin = (ruleSuffix: string, ruleName: string, pluginName: string): string => {
+  const isReservedPlugin = reservedPluginNames.has(ruleSuffix);
+
+  const filenameBase = `plugin-${pluginName}-rule-${ruleSuffix}_${ruleName}`
+    .replaceAll('@', '_')
+    .replaceAll(/\//g, '_');
+  const configFile = `${filenameBase}.json`;
+
+  let pluginFile;
+  let jsPlugin = pluginName;
+  if (isReservedPlugin) {
+    ruleSuffix = `reserved-${ruleSuffix}`;
+    pluginFile = `${filenameBase}.mjs`;
+    jsPlugin = `./${pluginFile}`
+
+    fs.writeFileSync(pluginFile, `
+      import plugin from '${pluginName}';
+
+      export default {
+        ...plugin,
+        meta: {
+          ...plugin.meta,
+          name: 'eslint-plugin-${ruleSuffix}',
+        },
+      };
+    `);
   }
-) => {
-  fs.writeFileSync(filename, JSON.stringify(config));
+
+  const config = {
+    plugins: [],
+    categories: {
+      correctness: 'off',
+    },
+    jsPlugins: [jsPlugin],
+    rules: {
+      // Our `testfile.ts` can have code which causes the lint rule to fail sometimes,
+      // and that's fine. We just want to make sure we don't get an error.
+      [`${ruleSuffix}/${ruleName}`]: 'warn',
+    },
+  };
+
+
+  fs.writeFileSync(configFile, JSON.stringify(config, null, 2));
   let oxlintOutput: string;
 
   const cliArguments = [
-    `--config="${filename}"`,
+    `--config="${configFile}"`,
     'testfile.ts',
   ];
 
@@ -28,27 +66,10 @@ const executeOxlintWithConfiguration = (
   }
 
 
-  fs.unlinkSync(filename);
+  fs.unlinkSync(configFile);
+  if (pluginFile) {
+    fs.unlinkSync(pluginFile)
+  }
 
   return oxlintOutput;
-};
-
-export const executeJsPlugin = (rule: string, pluginName: string): string => {
-  const config = {
-    plugins: [],
-    categories: {
-      correctness: 'off',
-    },
-    jsPlugins: [pluginName],
-    rules: {
-      // Our `testfile.ts` can have code which causes the lint rule to fail sometimes,
-      // and that's fine. We just want to make sure we don't get an error.
-      [rule]: 'warn',
-    },
-  };
-
-  const filename = `plugin-${pluginName}-rule-${rule}.json`
-    .replaceAll('@', '_')
-    .replaceAll(/\//g, '_');
-  return executeOxlintWithConfiguration(filename, config);
 };

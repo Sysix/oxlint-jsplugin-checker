@@ -73,3 +73,7 @@ export const executeJsPlugin = (ruleSuffix: string, ruleName: string, pluginName
 
   return oxlintOutput;
 };
+
+export const getPluginName = (packageName:string) => packageName.startsWith('@')
+  ? packageName.split('/', 1)[0]
+  : packageName.replace('eslint-plugin-', '')

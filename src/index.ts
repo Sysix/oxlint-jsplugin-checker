@@ -7,44 +7,59 @@ const isQuiet = process.argv.includes('--quiet');
 
 // Uncomment plugins here to test them.
 const pluginsToTest = [
-  'eslint-plugin-perfectionist',
-  'eslint-plugin-header',
-  'eslint-plugin-tsdoc',
-  'eslint-plugin-jsdoc',
-  'eslint-plugin-mocha',
-  '@stylistic/eslint-plugin',
-  'eslint-plugin-testing-library',
-  'eslint-plugin-jest-dom',
-  'eslint-plugin-storybook',
-  'eslint-plugin-regexp',
-  'eslint-plugin-no-jquery',
-  '@graphql-eslint/eslint-plugin',
-  '@docusaurus/eslint-plugin',
-  'eslint-plugin-import-alias',
-  '@angular-eslint/eslint-plugin',
-  'eslint-plugin-formatjs',
-  'eslint-plugin-cypress',
-  'eslint-plugin-playwright',
-  'eslint-plugin-solid',
-  'eslint-plugin-compat',
-  'eslint-plugin-fp',
-  'eslint-plugin-better-tailwindcss',
+  ...[
+    'eslint-plugin-perfectionist',
+    'eslint-plugin-header',
+    'eslint-plugin-tsdoc',
+    'eslint-plugin-mocha',
+    '@stylistic/eslint-plugin',
+    'eslint-plugin-testing-library',
+    'eslint-plugin-jest-dom',
+    'eslint-plugin-storybook',
+    'eslint-plugin-regexp',
+    'eslint-plugin-no-jquery',
+    '@graphql-eslint/eslint-plugin',
+    '@docusaurus/eslint-plugin',
+    'eslint-plugin-import-alias',
+    '@angular-eslint/eslint-plugin',
+    'eslint-plugin-formatjs',
+    'eslint-plugin-cypress',
+    'eslint-plugin-playwright',
+    'eslint-plugin-solid',
+    'eslint-plugin-compat',
+    'eslint-plugin-fp',
+    'eslint-plugin-better-tailwindcss',
+  ].map(packageName => ({packageName, jsPlugin: packageName, isReserved: false})),
+  // Reserved plugin names
+  ...[
+    'eslint-plugin-jsdoc',
+    'eslint-plugin-unicorn',
+  ].map(packageName => ({packageName, jsPlugin: `./${packageName}.mjs`, isReserved: true})),
 ];
 
 let successfulRulesCounter = 0;
 let failedRulesCounter = 0;
 let fullySuccessfulPlugins = [];
 
-for (const packageName of pluginsToTest) {
-  const {default: plugin} = await import(packageName);
-  const pluginName = plugin.meta?.name ?? getPluginName(packageName);
+for (const {packageName, jsPlugin, isReserved} of pluginsToTest) {
+  const {default: plugin} = await import(jsPlugin);
 
-  console.log(`\n=== Checking plugin: ${packageName} ===\n`);
+  let pluginNameToDisplay;
+  let pluginNameToRun;
+  if (isReserved) {
+    pluginNameToDisplay = getPluginName(packageName);
+    pluginNameToRun = getPluginName(plugin.meta.name);
+  } else {
+    pluginNameToDisplay = getPluginName(plugin.meta?.name ?? packageName);
+    pluginNameToRun = pluginNameToDisplay;
+  }
+
+  console.log(`\n=== Checking plugin: ${pluginNameToDisplay} ===\n`);
 
   let currentPluginHasAnyFailures = false;
   for (const ruleName of Object.keys(plugin.rules)) {
-    const rule = `${pluginName}/${ruleName}`;
-    const output = executeJsPlugin(pluginName, ruleName, packageName);
+    const rule = `${pluginNameToDisplay}/${ruleName}`;
+    const output = executeJsPlugin(pluginNameToRun, ruleName, jsPlugin);
 
     /// We are fine with warnings (they mean the rule failed but did not hit an error/crash), so allow them.
     if (/Found \d+ warnings? and 0 errors/.test(output.trimStart())) {

@@ -5,33 +5,10 @@ const reservedPluginNames = new Set([
   'jsdoc',
 ]);
 
-export const executeJsPlugin = (ruleSuffix: string, ruleName: string, pluginName: string): string => {
-  const isReservedPlugin = reservedPluginNames.has(ruleSuffix);
-
-  const filenameBase = `plugin-${pluginName}-rule-${ruleSuffix}_${ruleName}`
+export const executeJsPlugin = (pluginName: string, ruleName: string, jsPlugin: string): string => {
+  const configFile = `plugin-${pluginName}-rule-${pluginName}/${ruleName}`
     .replaceAll('@', '_')
-    .replaceAll(/\//g, '_');
-  const configFile = `${filenameBase}.json`;
-
-  let pluginFile;
-  let jsPlugin = pluginName;
-  if (isReservedPlugin) {
-    ruleSuffix = `reserved-${ruleSuffix}`;
-    pluginFile = `${filenameBase}.mjs`;
-    jsPlugin = `./${pluginFile}`
-
-    fs.writeFileSync(pluginFile, `
-      import plugin from '${pluginName}';
-
-      export default {
-        ...plugin,
-        meta: {
-          ...plugin.meta,
-          name: 'eslint-plugin-${ruleSuffix}',
-        },
-      };
-    `);
-  }
+    .replaceAll(/\//g, '_') + '.json'
 
   const config = {
     plugins: [],
@@ -42,7 +19,7 @@ export const executeJsPlugin = (ruleSuffix: string, ruleName: string, pluginName
     rules: {
       // Our `testfile.ts` can have code which causes the lint rule to fail sometimes,
       // and that's fine. We just want to make sure we don't get an error.
-      [`${ruleSuffix}/${ruleName}`]: 'warn',
+      [`${pluginName}/${ruleName}`]: 'warn',
     },
   };
 
@@ -67,9 +44,6 @@ export const executeJsPlugin = (ruleSuffix: string, ruleName: string, pluginName
 
 
   fs.unlinkSync(configFile);
-  if (pluginFile) {
-    fs.unlinkSync(pluginFile)
-  }
 
   return oxlintOutput;
 };

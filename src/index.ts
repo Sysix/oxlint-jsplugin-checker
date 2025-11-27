@@ -54,7 +54,7 @@ for (const {packageName, jsPlugin, isReserved} of pluginsToTest) {
     pluginNameToRun = pluginNameToDisplay;
   }
 
-  console.log(`\n=== Checking plugin: ${pluginNameToDisplay} ===\n`);
+  console.log(`\n=== Checking plugin: ${packageName} ===\n`);
 
   let currentPluginHasAnyFailures = false;
   for (const ruleName of Object.keys(plugin.rules)) {

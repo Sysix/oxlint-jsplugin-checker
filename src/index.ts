@@ -34,7 +34,7 @@ const pluginsToTest = [
   ...[
     'eslint-plugin-jsdoc',
     'eslint-plugin-unicorn',
-  ].map(packageName => ({packageName, jsPlugin: `./${packageName}.mjs`, isReserved: true})),
+  ].map(packageName => ({packageName, jsPlugin: `../${packageName}.mjs`, isReserved: true})),
 ];
 
 let successfulRulesCounter = 0;
@@ -59,7 +59,7 @@ for (const {packageName, jsPlugin, isReserved} of pluginsToTest) {
   let currentPluginHasAnyFailures = false;
   for (const ruleName of Object.keys(plugin.rules)) {
     const rule = `${pluginNameToDisplay}/${ruleName}`;
-    const output = executeJsPlugin(pluginNameToRun, ruleName, jsPlugin);
+    const output = executeJsPlugin(pluginNameToRun, ruleName, jsPlugin.replace('../', './'));
 
     /// We are fine with warnings (they mean the rule failed but did not hit an error/crash), so allow them.
     if (/Found \d+ warnings? and 0 errors/.test(output.trimStart())) {
